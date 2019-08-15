@@ -1,0 +1,99 @@
+<?php
+ini_set("soap.wsdl_cache_enabled", "0");
+include "KPSSoapClient.php";
+
+header("Content-Type: text/plain");
+
+
+$username = "KRM-7117690";
+$password = "Sabri.56*";
+
+//$tckn = $_GET[tckimlik];
+
+
+if($_GET[tckimlik]){
+$tckn = $_GET[tckimlik];
+} else {
+$tckn = "37517084476";
+}
+
+/*
+$username = "KRM-27613557282";
+$password = "wvLUn5BfZ";
+*/
+
+//$wsdl = "https://kpsbasvuru.nvi.gov.tr/Services/Wsdl.ashx?Service=KisiSorgulaTCKimlikNoServis";
+$wsdl = "https://kpsbasvuru.nvi.gov.tr/Services/Wsdl.ashx?Service=KisiSorgulaKisiBilgiServis";
+       
+
+$kpsClient = new KPSSoapClient($username, $password, $wsdl);
+//print_r($kpsClient);
+try {
+        $result = $kpsClient->ListeleCoklu(
+                array(
+                        'kriterListesi' => array(
+                                'KisiSorgulaTCKimlikNoSorguKriteri' => array(
+                                        'TCKimlikNo' => $tckn
+                                )
+                        )
+                )
+        );
+
+//echo $result[ListeleCokluResult][SorguSonucu][KisiBilgisi][HataBilgisi]; 
+//echo $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->HataBilgisi;
+print_r($result);
+	  $donen =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->HataBilgisi->Kod;
+print_r($donen);
+
+ $donen[1] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->Ad;
+ $donen[2] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->Soyad;
+ $donen[3] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->DogumYer;
+echo $donen[1]."\n";
+echo $donen[2]."\n";
+echo $donen[3]."\n";
+
+
+$dogum[ay] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->DogumTarih->Ay;
+$dogum[gun] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->DogumTarih->Gun;
+$dogum[yil] =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->DogumTarih->Yil;
+
+echo $dogum[gun]."\n";
+echo $dogum[ay]."\n";
+echo $dogum[yil]."\n";
+
+$cinsiyet =  $result->ListeleCokluResult->SorguSonucu->KisiBilgisi->TemelBilgisi->Cinsiyet->Kod;
+echo $cinsiyet."\n";
+print_r($result);
+
+} catch (Exception $e)
+{
+        print_r($e);
+}
+
+
+
+
+
+$wsdl      = "https://kpsbasvuru.nvi.gov.tr/Services/Wsdl.ashx?Service=KimlikNoSorgulaAdresServis&Version=2016/10/01 ";
+            $kpsClient = new KPSSoapClient($username, $password, $wsdl);
+            try {
+                $result = $kpsClient->Sorgula(
+                    array(
+                        'kriterListesi' => array(
+                            'KimlikNoileAdresSorguKriteri' => array(
+                                'KimlikNo' => $tckn,
+                            ),
+                        ),
+                    )
+                );
+                print_r( $result);
+               
+            } catch (Exception $e) {
+// print_r($e);
+            }
+
+
+
+
+
+?>
