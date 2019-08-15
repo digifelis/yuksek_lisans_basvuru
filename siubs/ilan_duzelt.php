@@ -22,10 +22,32 @@ if($_POST) {
 	echo $grup_no;
 	$yatay=$db->escape($_POST[yatay]);
 
+
+if($_POST[lisans_f] == "") { $lisans_f = 0; } else { $lisans_f = $_POST[lisans_f]; } 
+if($_POST[ylisans_f] == "") { $ylisans_f = 0; } else { $ylisans_f = $_POST[ylisans_f]; } 
+if($_POST[ales_f] == "") { $ales_f = 0; } else { $ales_f = $_POST[ales_f]; } 
+if($_POST[dil_f] == "") { $dil_f = 0; } else { $dil_f = $_POST[dil_f]; } 
+
+
+if($_POST[lisans_f1] == "") { $lisans_f1 = 0; } else { $lisans_f1 = $_POST[lisans_f1]; } 
+if($_POST[ylisans_f1] == "") { $ylisans_f1 = 0; } else { $ylisans_f1 = $_POST[ylisans_f1]; } 
+if($_POST[ales_f1] == "") { $ales_f1 = 0; } else { $dil_f1 = $_POST[dil_f1]; } 
+if($_POST[dil_f1] == "") { $dil_f1 = 0; } else { $dil_f1 = $_POST[dil_f1]; } 
+
+$formul = $lisans_f."|".$ylisans_f."|".$ales_f."|".$dil_f;
+$formul1 = $lisans_f1."|".$ylisans_f1."|".$ales_f1."|".$dil_f1;
+
+
+
+/*
 $formul = $_POST[lisans_f]."|".$_POST[ylisans_f]."|".$_POST[ales_f]."|".$_POST[dil_f];
 $formul1 = $_POST[lisans_f1]."|".$_POST[ylisans_f1]."|".$_POST[ales_f1]."|".$_POST[dil_f1];
+*/
+if($_POST[enstitu] == "Sosyal Bilimler") { $enst=2; }
+if($_POST[enstitu] == "Fen Bilimleri") { $enst=1; } 
+if($_POST[enstitu] == "Sağlık Bilimleri") { $enst=3; }
 
-$db->query("update ilanlar set ilan_adi='".$ilan_adi."',bas_tarihi='".$bas_tarihi."',bit_tarihi='".$bit_tarihi."',ales_turu0='".$ales_turu0."', ales_turu1='".$ales_turu1."',ales_turu2='".$ales_turu2."',aktif='".$aktif."' , enstitu='".$enstitu."',ana_bilim='".$ana_bilim."',bilim_dali='".$bilim_dali."' , doktora='".$doktora."' , grup_no='".$grup_no."' , formul='".$formul."' , formul1='".$formul1."' , yatay='".$yatay."' where id='".$_GET[id]."' ");
+$db->query("update ilanlar set ilan_adi='".$ilan_adi."',bas_tarihi='".$bas_tarihi."',bit_tarihi='".$bit_tarihi."',ales_turu0='".$ales_turu0."', ales_turu1='".$ales_turu1."',ales_turu2='".$ales_turu2."',aktif='".$aktif."' , enstitu='".$enstitu."',ana_bilim='".$ana_bilim."',bilim_dali='".$bilim_dali."' , doktora='".$doktora."' , grup_no='".$grup_no."' , formul='".$formul."' , formul1='".$formul1."' , yatay='".$yatay."' , enst='".$enst."' where id='".$_GET[id]."' ");
 
 	
 

@@ -18,12 +18,31 @@ if($_POST) {
 	$bilim_dali=$db->escape($_POST[bilim_dali]);
 	$doktora=$db->escape($_POST[doktora]);
 	$grup_no = $db->escape($_POST[grup_no]);
-	
+
+
+if($_POST[lisans_f] == "") { $lisans_f = 0; } else { $lisans_f = $_POST[lisans_f]; } 
+if($_POST[ylisans_f] == "") { $ylisans_f = 0; } else { $ylisans_f = $_POST[ylisans_f]; } 
+if($_POST[ales_f] == "") { $ales_f = 0; } else { $ales_f = $_POST[ales_f]; } 
+if($_POST[dil_f] == "") { $dil_f = 0; } else { $dil_f = $_POST[dil_f]; } 
+
+
+if($_POST[lisans_f1] == "") { $lisans_f1 = 0; } else { $lisans_f1 = $_POST[lisans_f1]; } 
+if($_POST[ylisans_f1] == "") { $ylisans_f1 = 0; } else { $ylisans_f1 = $_POST[ylisans_f1]; } 
+if($_POST[ales_f1] == "") { $ales_f1 = 0; } else { $dil_f1 = $_POST[dil_f1]; } 
+if($_POST[dil_f1] == "") { $dil_f1 = 0; } else { $dil_f1 = $_POST[dil_f1]; } 
+
+$formul = $lisans_f."|".$ylisans_f."|".$ales_f."|".$dil_f;
+$formul1 = $lisans_f1."|".$ylisans_f1."|".$ales_f1."|".$dil_f1;
+/*	
 $formul = $_POST[lisans_f]."|".$_POST[ylisans_f]."|".$_POST[ales_f]."|".$_POST[dil_f];
 $formul1 = $_POST[lisans_f1]."|".$_POST[ylisans_f1]."|".$_POST[ales_f1]."|".$_POST[dil_f1];
+*/
 
+if($_POST[enstitu] == "Sosyal Bilimler") { $enst=2; }
+if($_POST[enstitu] == "Fen Bilimleri") { $enst=1; } 
+if($_POST[enstitu] == "Sağlık Bilimleri") { $enst=3; }
 
-	$db->query("insert into ilanlar (ilan_adi,bas_tarihi,bit_tarihi,aktif,enstitu,ana_bilim,bilim_dali,doktora , ales_turu0 , ales_turu1,ales_turu2,grup_no , formul , formul1 ) values ('".$ilan_adi."','".$bas_tarihi."','".$bit_tarihi."','".$aktif."' , '".$enstitu."' , '".$ana_bilim."' , '".$bilim_dali."', '".$doktora."' ,'".$ales_turu0."','".$ales_turu1."','".$ales_turu2."','".$grup_no."' , '".$formul."' , '".$formul1."') ");
+	$db->query("insert into ilanlar (ilan_adi,bas_tarihi,bit_tarihi,aktif,enstitu,ana_bilim,bilim_dali,doktora , ales_turu0 , ales_turu1,ales_turu2,grup_no , formul , formul1,enst ) values ('".$ilan_adi."','".$bas_tarihi."','".$bit_tarihi."','".$aktif."' , '".$enstitu."' , '".$ana_bilim."' , '".$bilim_dali."', '".$doktora."' ,'".$ales_turu0."','".$ales_turu1."','".$ales_turu2."','".$grup_no."' , '".$formul."' , '".$formul1."', '".$enst."') ");
 	
 
 	if($db->rows_affected>0) {
@@ -135,10 +154,10 @@ $satir = $db->get_row("select * from ilanlar where id='".$db->insert_id."' ");
   </tr>
   <tr>
 
-  <td><input  class="form-control"     type="text" name="lisans_f" id="ales_sayisal"   value="<?php echo $lisans_f; ?>"></td>
-  <td><input  class="form-control"     type="text" name="ylisans_f" id="ales_sozel"   value="<?php echo $ylisans_f; ?>"></td>
-  <td><input  class="form-control"     type="text" name="ales_f" id="ales_ea"   value="<?php echo $ales_f; ?>"></td>
-  <td><input  class="form-control"     type="text" name="dil_f" id="ales_ea"   value="<?php echo $dil_f; ?>"></td>
+  <td><input  class="form-control"     type="text" name="lisans_f" id="ales_sayisal"   value="<?php echo $_POST[lisans_f]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="ylisans_f" id="ales_sozel"   value="<?php echo $_POST[ylisans_f]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="ales_f" id="ales_ea"   value="<?php echo $_POST[ales_f]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="dil_f" id="ales_ea"   value="<?php echo $_POST[dil_f]; ?>"></td>
 
   </tr>
  
@@ -147,10 +166,10 @@ $satir = $db->get_row("select * from ilanlar where id='".$db->insert_id."' ");
   </tr>
   <tr>
 
-  <td><input  class="form-control"     type="text" name="lisans_f1" id="ales_sayisal"   value="<?php echo $lisans_f1; ?>"></td>
-  <td><input  class="form-control"     type="text" name="ylisans_f1" id="ales_sozel"   value="<?php echo $ylisans_f1; ?>"></td>
-  <td><input  class="form-control"     type="text" name="ales_f1" id="ales_ea"   value="<?php echo $ales_f1; ?>"></td>
-  <td><input  class="form-control"     type="text" name="dil_f1" id="ales_ea"   value="<?php echo $dil_f1; ?>"></td>
+  <td><input  class="form-control"     type="text" name="lisans_f1" id="ales_sayisal"   value="<?php echo $_POST[lisans_f1]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="ylisans_f1" id="ales_sozel"   value="<?php echo $_POST[ylisans_f1]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="ales_f1" id="ales_ea"   value="<?php echo $_POST[ales_f1]; ?>"></td>
+  <td><input  class="form-control"     type="text" name="dil_f1" id="ales_ea"   value="<?php echo $_POST[dil_f1]; ?>"></td>
 
   </tr>
 
