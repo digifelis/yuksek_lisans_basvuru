@@ -57,8 +57,13 @@ $satir = $db->get_row("select * from ilanlar where id='".$db->insert_id."' ");
                
                  <br>
                  <label>  Enstitü Adı&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                    <input type="text" class="form-control"  size="50"   name="enstitu"  value="<?php echo $satir->enstitu;?>">
-               
+                 <!--   <input type="text" class="form-control"  size="50"   name="enstitu"  value="<?php echo $satir->enstitu;?>"> -->
+                <select  class="form-control" style="width:405px;"  name="enstitu" >
+        <option  value="Sosyal Bilimler" <?php if($satir->enstitu == "Sosyal Bilimler") { echo "selected"; } else {echo "";}   ?> >Sosyal Bilimler</option>
+        <option  value="Fen Bilimleri" <?php if($satir->enstitu == "Fen Bilimleri") { echo "selected"; } else {echo "";}   ?>>Fen Bilimleri</option>
+        <option  value="Sağlık Bilimleri" <?php if($satir->enstitu == "Sağlık Bilimleri") { echo "selected"; } else {echo "";}   ?>>Sağlık Bilimleri</option>
+                        </select> 
+						
                  <br>
                  <label> Ana Bilim Dalı&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="text" class="form-control" size="50"    name="ana_bilim"  value="<?php echo $satir->ana_bilim;?>">
