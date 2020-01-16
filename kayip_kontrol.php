@@ -89,7 +89,7 @@ while ($length > 0) {
 				$mail->SetLanguage("tr", "phpmailer/language");
 				$mail->CharSet ="utf-8";
 				$mail->Username = "bes-tas@hotmail.com"; // Mail adresimizin kullanicı adi
-				$mail->Password = "Sude2014."; // Mail adresimizin sifresi
+				$mail->Password = "abcdabcd"; // Mail adresimizin sifresi
 				$mail->SetFrom("bes-tas@hotmail.com", "Siirt Üniversitesi Başvuru Sistemi"); // Mail attigimizda gorulecek ismimiz
 				$mail->AddAddress( $satir->email); // Maili gonderecegimiz kisi yani alici
 				$mail->Subject = "Siirt Üniversitesi Başvuru Sistemi - Parola Hatırlatma"; // Konu basligi
